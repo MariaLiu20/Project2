@@ -140,7 +140,7 @@ if __name__ == "__main__":
 	print("FINAL")
 	print(datagram)
 	# Send to server
-	clientSocket = socket(AF_INET, SOCK_STREAM)
-	clientSocket.sendall(datagram.encode())
+	clientSocket = socket(AF_INET, SOCK_DGRAM)
+	clientSocket.sendto(datagram, (server_name, port_number))
 
 	print("Finished")

@@ -3,6 +3,7 @@ from socket import *
 import sys
 import time
 import re
+import hashlib
 
 bufferSize = 1024
 timeout = 1.0
@@ -111,4 +112,44 @@ if __name__ == "__main__":
 	#'HEYO\nSequenceNumber:_\nCheckSum\n\nPAYLOADBODY' // TODO Q : checksum calc on PAYLOADBODY too? what to calculate on?
 
 	# not specifying filename and filename2 like below should transfer any standard input from the sender to the standard output of the receiver, len(filename) == 0		
+
+	md5_hash = hashlib.md5()
+	filename1 = "soda.txt"
+	filename2 = "filename2"
+	seq_num = 3
+	f = open(filename1, "r+b")
+	# Add header
+	header = filename1 + "\n" + filename2 + "\n" + str(seq_num) + "\n"
+	print("HEADER")
+	print(header.encode())
+	segment = header.encode() + b'\n'
+	# Read from file
+	body = b''
+	byte = f.read(1)
+	while byte:
+		body += byte
+		byte = f.read(1)
+	# Checksum
+	md5_hash.update(segment + body)            # update hash object's contents with the file contents
+	digest = md5_hash.hexdigest()       # saves the hash into a hexidecimal string
+	print("CHECKSUM")
+	print(digest.encode())
+	datagram = header.encode() + digest.encode() + b'\n\n' + body
+	print("FINAL")
+	print(datagram)
+	# Send to server
+	clientSocket = socket(AF_INET, SOCK_STREAM)
+	clientSocket.sendall(datagram.encode())
+
+	# RECEIVER
+	clientSocket = socket(AF_INET, SOCK_STREAM)
+	header = b''
+	while b'\n\n' not in header:
+		response = clientSocket.recv(1)
+		if (len(response) == 0):
+			clientSocket.close()
+			clientSocket = socket(AF_INET, SOCK_STREAM)
+			break
+		else:
+			header += response
 	print("Finished")

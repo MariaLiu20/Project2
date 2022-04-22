@@ -110,5 +110,4 @@ if __name__ == "__main__":
 	# Sending File || StdInputs			TODO: Design Header: Sequence Number, CheckSum LIBARY, (windowing)  && ACKs , NAKs
 	#'HEYO\nSequenceNumber:_\nCheckSum\n\nPAYLOADBODY' // TODO Q : checksum calc on PAYLOADBODY too? what to calculate on?
 
-	# not specifying filename and filename2 like below should transfer any standard input from the sender to the standard output of the receiver, len(filename) == 0		
-	print("Finished")
+	

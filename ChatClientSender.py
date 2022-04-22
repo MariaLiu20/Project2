@@ -141,15 +141,4 @@ if __name__ == "__main__":
 	clientSocket = socket(AF_INET, SOCK_STREAM)
 	clientSocket.sendall(datagram.encode())
 
-	# RECEIVER
-	clientSocket = socket(AF_INET, SOCK_STREAM)
-	header = b''
-	while b'\n\n' not in header:
-		response = clientSocket.recv(1)
-		if (len(response) == 0):
-			clientSocket.close()
-			clientSocket = socket(AF_INET, SOCK_STREAM)
-			break
-		else:
-			header += response
 	print("Finished")

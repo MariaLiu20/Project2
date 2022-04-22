@@ -130,8 +130,8 @@ if __name__ == "__main__":
 		body += byte
 		byte = f.read(1)
 	# Checksum
-	md5_hash.update(segment + body)            # update hash object's contents with the file contents
-	digest = md5_hash.hexdigest()       # saves the hash into a hexidecimal string
+	md5_hash.update(segment + body)				# update hash object's contents with the file contents
+	digest = md5_hash.hexdigest()				# saves the hash into a hexidecimal string
 	print("CHECKSUM")
 	print(digest.encode())
 	datagram = header.encode() + digest.encode() + b'\n\n' + body

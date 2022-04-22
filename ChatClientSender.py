@@ -141,6 +141,10 @@ if __name__ == "__main__":
 	print(datagram)
 	# Send to server
 	clientSocket = socket(AF_INET, SOCK_DGRAM)
-	clientSocket.sendto(datagram, (server_name, port_number))
+	i = 0
+	while i < len(datagram):
+		j = i + 1024
+		clientSocket.sendto(datagram[i:j], (server_name, port_number))
+		i += 1024
 
 	print("Finished")

@@ -129,6 +129,8 @@ if __name__ == "__main__":
 	while byte:
 		body += byte
 		byte = f.read(1)
+	print("BODY")
+	print(body)
 	# Checksum
 	md5_hash.update(segment + body)				# update hash object's contents with the file contents
 	digest = md5_hash.hexdigest()				# saves the hash into a hexidecimal string

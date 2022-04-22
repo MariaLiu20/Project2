@@ -110,4 +110,5 @@ if __name__ == "__main__":
 	# Sending File || StdInputs			TODO: Design Header: Sequence Number, CheckSum LIBARY, (windowing)  && ACKs , NAKs
 	#'HEYO\nSequenceNumber:_\nCheckSum\n\nPAYLOADBODY' // TODO Q : checksum calc on PAYLOADBODY too? what to calculate on?
 
-	
+	print("Finished")
+
